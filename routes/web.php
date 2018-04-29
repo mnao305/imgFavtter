@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TwitterController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +13,9 @@
 |
 */
 
+
+Route::get('/login/twitter', 'TwitterController@login');
+Route::get('/login/twitter/callback', 'TwitterController@callback');
 Route::get('/{any}', function () {
     return view('app');
 })->where('any', '.*');
