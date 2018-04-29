@@ -15,11 +15,11 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">ツイート</a></li>
+                <li><a href="/login/twitter">Register・Login</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">その他<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><router-link to="about">About</router-link></li>
-                        <li><router-link to="login">Register・Login</router-link></li>
                         <li><router-link to="userconfig">UserConfig</router-link></li>
                         <li><router-link to="logout">Logout</router-link></li>
                     </ul>
