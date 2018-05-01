@@ -58,7 +58,22 @@ class TwitterController extends Controller
             $token['oauth_token'],
             $token['oauth_token_secret']
         );
-        $userName = $twitter->get('account/verify_credentials')->screen_name;
-        return redirect("/$userName");
+        session([
+            'twitter' => $twitter
+        ]);
+        return redirect("/main");
+    }
+
+    public function getFav()
+    {
+        $twitter = session('twitter');
+        try {
+            // いいね履歴を入手
+            return  $twitter->get("favorites/list", ["count" => "100"]);
+            // return $twitter->get("favorites/list", ["count" => "100", "max_id" => $_POST['getFav']]);
+        } catch (\Error $e) {
+            // いいね取得に失敗したらメッセージを表示させる
+            return "いいねの取得に失敗しました。\nしばらくしてからやり直してください";
+        }
     }
 }

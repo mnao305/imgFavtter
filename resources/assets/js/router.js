@@ -7,9 +7,9 @@ export default new VueRouter({
     mode: "history",
     routes: [
         { path: "/", component: require("./components/index.vue") },
+        { path: "/main", component: require("./components/main.vue") },
         { path: "/userconfig", component: require("./components/userConfig.vue") },
         { path: "/about", component: require("./components/about.vue") },
-        { path: "/:username", component: require("./components/main.vue") },
     ],
     scrollBehavior(to, from, savePosition) {
         if (savePosition) {

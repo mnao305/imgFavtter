@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\TwitterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +12,8 @@ use App\Http\Controllers\TwitterController;
 |
 */
 
+
+Route::get('fav', 'TwitterController@getFav');
 
 Route::get('/login/twitter', 'TwitterController@login');
 Route::get('/login/twitter/callback', 'TwitterController@callback');
