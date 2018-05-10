@@ -13,7 +13,6 @@
 */
 
 
-Route::get('fav', 'TwitterController@getFav');
 
 Route::get('/login/twitter', 'TwitterController@login');
 Route::get('/login/twitter/callback', 'TwitterController@callback');
