@@ -76,4 +76,15 @@ class TwitterController extends Controller
             return "いいねの取得に失敗しました。\nしばらくしてからやり直してください";
         }
     }
+
+    public function userCheck()
+    {
+        $twitter = session('twitter');
+        try {
+            $user = $twitter->get('account/verify_credentials');
+            return json_encode($user);
+        } catch (\Error $e) {
+            return "notLogin";
+        }
+    }
 }
