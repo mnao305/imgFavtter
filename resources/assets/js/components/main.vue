@@ -1,12 +1,21 @@
 <template>
     <div>
-        <p>{{this.user.name}}さんのいいね一覧</p>
+        <p>{{user.name}}さんのいいね一覧</p>
         <div v-for="fav in favList">
-            {{ fav.text }}
-            {{ fav.extended_entities.media.media_url_https }}
+            <!-- 画像表示部 -->
             <img :src="fav.extended_entities.media[0].media_url_https">
+            <div v-if="fav.extended_entities.media[1]">
+                <img :src="fav.extended_entities.media[1].media_url_https">
+            </div>
+            <div v-if="fav.extended_entities.media[2]">
+                <img :src="fav.extended_entities.media[2].media_url_https">
+            </div>
+            <div v-if="fav.extended_entities.media[3]">
+                <img :src="fav.extended_entities.media[3].media_url_https">
+            </div>
+            <br>
+            <br>
         </div>
-        <br>
     </div>
 </template>
 
@@ -50,13 +59,6 @@ export default {
                     return(typeof(elem.extended_entities) !== "undefined");
                 });
             })
-        },
-        tmp () {
-            if (Boolean(fav)) {
-                return true;
-            } else {
-                return false;
-            }
         }
     }
 }
