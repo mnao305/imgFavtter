@@ -28,9 +28,3 @@
         </div><!-- /.navbar-collapse -->
     </nav>
 </template>
-
-<style>
-    .navbar-right {
-        margin-right: 10px;
-    }
-</style>
