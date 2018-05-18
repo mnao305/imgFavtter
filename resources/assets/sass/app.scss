@@ -29,10 +29,17 @@ body {
   -------------------------------------------------- */
 .container {
     width: auto;
-    padding: 0 15px;
+    img {
+        max-width: 300px;
+        margin: 10px 5px;
+    }
+    .text-muted {
+        margin: 20px 0;
+    }
 }
-.container .text-muted {
-    margin: 20px 0;
+
+.mainContents {
+    // width: auto;
 }
 
 .navbar-right {

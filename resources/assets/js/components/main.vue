@@ -1,31 +1,17 @@
 <template>
     <div>
         <p>{{user.name}}さんのいいね一覧</p>
-        <div v-for="fav in favList">
-            <!-- 画像表示部 -->
-            <img :src="fav.extended_entities.media[0].media_url_https">
-            <div v-if="fav.extended_entities.media[1]">
-                <img :src="fav.extended_entities.media[1].media_url_https">
+        <div v-masonry transition-duration="0.5s" item-selector=".item" class="mainContents">
+            <div v-for="fav in favList" class="tweet">
+                <!-- 画像表示部 -->
+                <img v-masonry-tile class="item" :src="fav.extended_entities.media[0].media_url_https">
+                <img v-masonry-tile class="item" v-if="fav.extended_entities.media[1]" :src="fav.extended_entities.media[1].media_url_https">
+                <img v-masonry-tile class="item" v-if="fav.extended_entities.media[2]" :src="fav.extended_entities.media[2].media_url_https">
+                <img v-masonry-tile class="item" v-if="fav.extended_entities.media[3]" :src="fav.extended_entities.media[3].media_url_https">
             </div>
-            <div v-if="fav.extended_entities.media[2]">
-                <img :src="fav.extended_entities.media[2].media_url_https">
-            </div>
-            <div v-if="fav.extended_entities.media[3]">
-                <img :src="fav.extended_entities.media[3].media_url_https">
-            </div>
-            <br>
-            <br>
         </div>
     </div>
 </template>
-
-<style>
-    img {
-        max-width: 100px;
-        max-height: 100px;
-    }
-</style>
-
 
 <script>
 export default {
