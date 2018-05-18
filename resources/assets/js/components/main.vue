@@ -22,7 +22,8 @@ export default {
     data() {
         return {
             favList: [],
-            user: null
+            user: null,
+            tmpFavId: null
         }
     },
     methods: {
@@ -40,6 +41,9 @@ export default {
             axios.get('api/fav')
             .then(res => {
                 console.log(res.data);
+                // 取得した中で一番古いツイートのIDを取得
+                this.tmpFavId = res.data[res.data.length - 1].id_str;
+                console.log(this.tmpFavId);
                 // 画像つきのみを抽出
                 this.favList = res.data.filter(function (elem) {
                     return(typeof(elem.extended_entities) !== "undefined");
