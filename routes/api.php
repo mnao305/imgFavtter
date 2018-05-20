@@ -16,4 +16,5 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 Route::get('fav', 'TwitterController@getFav');
+Route::get('addfav', 'TwitterController@addFav');
 Route::get('twitterUserCheck', 'TwitterController@userCheck');

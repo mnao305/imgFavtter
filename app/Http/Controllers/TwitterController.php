@@ -70,7 +70,18 @@ class TwitterController extends Controller
         try {
             // いいね履歴を入手
             return  $twitter->get("favorites/list", ["count" => "100"]);
-            // return $twitter->get("favorites/list", ["count" => "100", "max_id" => $_POST['getFav']]);
+        } catch (\Error $e) {
+            // いいね取得に失敗したらメッセージを表示させる
+            return "いいねの取得に失敗しました。\nしばらくしてからやり直してください";
+        }
+    }
+
+    public function addFav(Request $request)
+    {
+        $twitter = session('twitter');
+        try {
+            // いいね履歴を入手
+            return $twitter->get("favorites/list", ["count" => "100", "max_id" => $request->get('id')]);
         } catch (\Error $e) {
             // いいね取得に失敗したらメッセージを表示させる
             return "いいねの取得に失敗しました。\nしばらくしてからやり直してください";

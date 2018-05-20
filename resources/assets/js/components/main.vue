@@ -10,6 +10,7 @@
                 <img v-masonry-tile class="item" v-if="fav.extended_entities.media[3]" :src="fav.extended_entities.media[3].media_url_https">
             </div>
         </div>
+        <button v-on:click="addFav">追加！</button>
     </div>
 </template>
 
@@ -48,6 +49,27 @@ export default {
                 this.favList = res.data.filter(function (elem) {
                     return(typeof(elem.extended_entities) !== "undefined");
                 });
+            })
+        },
+        addFav() {
+            let params = { id: this.tmpFavId };
+            axios.get('api/addfav', { params })
+            .then(res => {
+                console.log(res.data);
+                // 取得した中で一番古いツイートのIDを取得
+                this.tmpFavId = res.data[res.data.length - 1].id_str;
+                console.log(this.tmpFavId);
+                // 先頭に同じ内容が入ってしまう対応
+                // 1つ目を消す
+                res.data.shift();
+                // 画像つきのみを抽出
+                let tmpList = res.data.filter(function (elem) {
+                    return(typeof(elem.extended_entities) !== "undefined");
+                });
+                // 今ある配列の後ろに結合
+                Array.prototype.push.apply(this.favList, tmpList);
+                // 配列の長さを更新
+                this.favList.splice(this.favList.length);
             })
         }
     }
