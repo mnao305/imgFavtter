@@ -85,7 +85,7 @@ export default {
             // もっとスマートに実装したい
             this.heightCheck();
             this.scrollY = window.scrollY;
-            if (this.flag == false && this.scrollY + this.windowHeight >= this.pageHeight) {
+            if (this.flag == false && this.scrollY + (this.windowHeight * 3) >= this.pageHeight) {
                 // ページ最下部に来たらaddFav実行
                 // 複数回実行されないようフラグを立てる
                 this.flag = true;
