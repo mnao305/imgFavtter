@@ -10,22 +10,29 @@
                 <img v-masonry-tile class="item" v-if="fav.extended_entities.media[3]" :src="fav.extended_entities.media[3].media_url_https">
             </div>
         </div>
-        <button v-on:click="addFav">追加！</button>
     </div>
 </template>
 
 <script>
 export default {
     created() {
-        this.getFav();
         this.loginCheck();
+        this.heightCheck();
+        this.getFav();
     },
     data() {
         return {
             favList: [],
             user: null,
-            tmpFavId: null
+            tmpFavId: null,
+            scrollY: 0,
+            pageHeight: 0,
+            windowHeight: 0,
+            flag: false
         }
+    },
+    mounted() {
+        window.addEventListener('scroll', this.handleScroll);
     },
     methods: {
         loginCheck() {
@@ -70,7 +77,28 @@ export default {
                 Array.prototype.push.apply(this.favList, tmpList);
                 // 配列の長さを更新
                 this.favList.splice(this.favList.length);
+                // ページの高さを更新する
+                this.heightCheck();
             })
+        },
+        handleScroll() {
+            // もっとスマートに実装したい
+            this.heightCheck();
+            this.scrollY = window.scrollY;
+            if (this.flag == false && this.scrollY + this.windowHeight >= this.pageHeight) {
+                // ページ最下部に来たらaddFav実行
+                // 複数回実行されないようフラグを立てる
+                this.flag = true;
+                this.addFav();
+                // 1秒経ったら実行できるように
+                setTimeout(() => {
+                    this.flag = false;
+                }, 1000);
+            }
+        },
+        heightCheck() {
+            this.pageHeight = document.body.scrollHeight;
+            this.windowHeight = document.documentElement.clientHeight;
         }
     }
 }
