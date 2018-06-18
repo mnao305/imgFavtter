@@ -20,6 +20,7 @@
         "vue-masonry": "^0.11.1"
     },
     "dependencies": {
+        "@fancyapps/fancybox": "^3.3.5",
         "vue-router": "^3.0.1"
     }
 }

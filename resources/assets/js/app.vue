@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import "../../../node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css";
+import "../../../node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js";
 export default {
     components: {
         navbar: require('./components/navbar.vue'),
