@@ -7,7 +7,7 @@
                     <!-- 動画だったら動画を表示 -->
                     <a :href="fav.extended_entities.media[0].video_info.variants[1].url" :data-fancybox="fav.id_str" :data-caption="fav.text + ` By ` + fav.user.name + `<br><a href='https://twitter.com/` + fav.user.screen_name + `/status/` + fav.id_str + `' target='_blank'>Twitterで元ツイートを見る→</a>`">
                         <img :src="fav.extended_entities.media[0].media_url_https">
-                        <img src="../../../../public/img/play.png" class="playBtn">
+                        <img src="/img/play.png" class="playBtn">
                     </a>
                 </div>
                 <div v-else>
