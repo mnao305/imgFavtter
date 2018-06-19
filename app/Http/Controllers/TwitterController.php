@@ -98,4 +98,10 @@ class TwitterController extends Controller
             return "notLogin";
         }
     }
+
+    public function logout()
+    {
+        session()->flush();
+        return redirect("/");
+    }
 }

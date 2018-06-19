@@ -16,6 +16,7 @@
 
 Route::get('/login/twitter', 'TwitterController@login');
 Route::get('/login/twitter/callback', 'TwitterController@callback');
+Route::get('/logout', 'TwitterController@logout');
 Route::get('/{any}', function () {
     return view('app');
 })->where('any', '.*');
