@@ -15,16 +15,37 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="https://twitter.com/intent/tweet?text=いいねしてきた画像を一覧表示!%20imgFavtter%0a&url=https://imgFavtter.mnao305.com" onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">ツイート</a></li>
-                <li><a href="/login/twitter">Register・Login</a></li>
+                <li v-if="user == 'notLogin'"><a href="/login/twitter">登録・ログイン</a></li>
+                <li v-else><router-link to="main">一覧画面へ</router-link></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">その他<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><router-link to="about">About</router-link></li>
-                        <li><router-link to="userconfig">UserConfig</router-link></li>
-                        <li><router-link to="logout">Logout</router-link></li>
+                        <li><router-link to="about">当アプリについて</router-link></li>
+                        <li><router-link to="userconfig">設定</router-link></li>
+                        <li><router-link to="logout">ログアウト</router-link></li>
                     </ul>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
 </template>
+<script>
+export default {
+    created() {
+
+    },
+    data() {
+        return {
+            user: null
+        }
+    },
+    methods: {
+        loginCheck() {
+            axios.get('api/twitterUserCheck')
+            .then(res => {
+                this.user = res.data;
+            })
+        }
+    }
+}
+</script>
