@@ -21,8 +21,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">その他<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><router-link to="about">当アプリについて</router-link></li>
-                        <li><router-link to="userconfig">設定</router-link></li>
-                        <li><a href="/logout">ログアウト</a></li>
+                        <li v-if="login == 'logind'"><router-link to="userconfig">設定</router-link></li>
+                        <li v-if="login == 'logind'"><a href="/logout">ログアウト</a></li>
                     </ul>
                 </li>
             </ul>
