@@ -12,25 +12,10 @@
                 </div>
                 <div v-else>
                     <!-- 画像表示部 -->
-                    <div v-masonry-tile class="item img">
-                    <a :href="fav.extended_entities.media[0].media_url_https" :data-fancybox="fav.id_str" :data-caption="fav.text + ` By ` + fav.user.name + `<br><a href='https://twitter.com/` + fav.user.screen_name + `/status/` + fav.id_str + `' target='_blank'>Twitterで元ツイートを見る→</a>`">
-                        <img :src="fav.extended_entities.media[0].media_url_https + ':small'">
-                    </a>
-                    </div>
-                    <div v-masonry-tile class="item img">
-                    <a v-if="fav.extended_entities.media[1]" :href="fav.extended_entities.media[1].media_url_https" :data-fancybox="fav.id_str" :data-caption="fav.text + ` By ` + fav.user.name + `<br><a href='https://twitter.com/` + fav.user.screen_name + `/status/` + fav.id_str + `' target='_blank'>Twitterで元ツイートを見る→</a>`">
-                        <img :src="fav.extended_entities.media[1].media_url_https + ':small'">
-                    </a>
-                    </div>
-                    <div v-masonry-tile class="item img">
-                    <a v-if="fav.extended_entities.media[2]" :href="fav.extended_entities.media[2].media_url_https" :data-fancybox="fav.id_str" :data-caption="fav.text + ` By ` + fav.user.name + `<br><a href='https://twitter.com/` + fav.user.screen_name + `/status/` + fav.id_str + `' target='_blank'>Twitterで元ツイートを見る→</a>`">
-                        <img :src="fav.extended_entities.media[2].media_url_https + ':small'">
-                    </a>
-                    </div>
-                    <div v-masonry-tile class="item img">
-                    <a v-if="fav.extended_entities.media[3]" :href="fav.extended_entities.media[3].media_url_https" :data-fancybox="fav.id_str" :data-caption="fav.text + ` By ` + fav.user.name + `<br><a href='https://twitter.com/` + fav.user.screen_name + `/status/` + fav.id_str + `' target='_blank'>Twitterで元ツイートを見る→</a>`">
-                        <img :src="fav.extended_entities.media[3].media_url_https + ':small'">
-                    </a>
+                    <div v-for="media in fav.extended_entities.media" v-masonry-tile class="item img">
+                        <a :href="media.media_url_https" :data-fancybox="fav.id_str" :data-caption="fav.text + ` By ` + fav.user.name + `<br><a href='https://twitter.com/` + fav.user.screen_name + `/status/` + fav.id_str + `' target='_blank'>Twitterで元ツイートを見る→</a>`">
+                            <img :src="media.media_url_https + ':small'">
+                        </a>
                     </div>
                 </div>
             </div>
