@@ -5,7 +5,7 @@
             <div v-for="fav in favList" class="tweet">
                 <div v-if="fav.extended_entities.media[0].type == 'video'" v-masonry-tile class="item video">
                     <!-- 動画だったら動画を表示 -->
-                    <a :href="fav.extended_entities.media[0].video_info.variants[1].url" :data-fancybox="fav.id_str" :data-caption="fav.text + ` By ` + fav.user.name + `<br><a href='https://twitter.com/` + fav.user.screen_name + `/status/` + fav.id_str + `' target='_blank'>Twitterで元ツイートを見る→</a>`">
+                    <a :href="getVideoURL(fav)" :data-fancybox="fav.id_str" :data-caption="fav.text + ` By ` + fav.user.name + `<br><a href='https://twitter.com/` + fav.user.screen_name + `/status/` + fav.id_str + `' target='_blank'>Twitterで元ツイートを見る→</a>`">
                         <img :src="fav.extended_entities.media[0].media_url_https + ':small'">
                         <img src="/img/play.png" class="playBtn">
                     </a>
@@ -109,6 +109,17 @@ export default {
         heightCheck() {
             this.pageHeight = document.body.scrollHeight;
             this.windowHeight = document.documentElement.clientHeight;
+        },
+        getVideoURL(tweet) {
+            // アルゴリズム力つけろ
+            var videoInfos = tweet.extended_entities.media[0].video_info.variants;
+            var videoTmp = videoInfos[0];
+            videoInfos.forEach(element => {
+                if (element.bitrate && (!videoTmp.bitrate || videoTmp.bitrate < element.bitrate)) {
+                    videoTmp = element;
+                }
+            });
+            return videoTmp.url;
         }
     }
 }
