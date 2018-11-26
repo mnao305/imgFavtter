@@ -13,7 +13,6 @@
 </head>
 <body>
     <div id="app">
-        <example></example>
     </div>
 </body>
 <script src="js/app.js"></script>
