@@ -8,7 +8,7 @@ export default new VueRouter({
     routes: [
         { path: "/", component: require("./components/index.vue") },
         { path: "/main", component: require("./components/main.vue") },
-        { path: "/userconfig", component: require("./components/userConfig.vue") },
+        // { path: "/userconfig", component: require("./components/userConfig.vue") },
         { path: "/about", component: require("./components/about.vue") },
     ],
     scrollBehavior(to, from, savePosition) {
