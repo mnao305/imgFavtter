@@ -83,19 +83,26 @@ export default {
                 let tmpList = res.data.filter(function (elem) {
                     return(typeof(elem.extended_entities) !== "undefined");
                 });
+                let flag;
+                if (tmpList.length <= 15) {
+                    flag = true;
+                }
                 // 今ある配列の後ろに結合
                 Array.prototype.push.apply(this.favList, tmpList);
                 // 配列の長さを更新
                 this.favList.splice(this.favList.length);
                 // ページの高さを更新する
                 this.heightCheck();
+                if (flag == true) {
+                    this.addFav();
+                }
             })
         },
         handleScroll() {
             // もっとスマートに実装したい
             this.heightCheck();
             this.scrollY = window.scrollY;
-            if (this.flag == false && this.scrollY + (this.windowHeight * 3) >= this.pageHeight) {
+            if (this.flag == false && this.scrollY + (this.windowHeight * 5) >= this.pageHeight) {
                 // ページ最下部に来たらaddFav実行
                 // 複数回実行されないようフラグを立てる
                 this.flag = true;
