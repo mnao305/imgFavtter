@@ -62,6 +62,12 @@ body {
         padding: 2pt;
         background-color: rgba($color: #ffffff, $alpha: 0.8);
     }
+    .msg-enter-active, .msg-leave-active {
+        transition: opacity 0.5s;
+    }
+    .msg-enter, .msg-leave-to{
+        opacity: 0;
+    }
 }
 
 .mainContents {

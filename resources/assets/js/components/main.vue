@@ -3,16 +3,20 @@
         <p>{{user.name}}さんのいいね一覧</p>
         <p>設定</p>
         <dir id="config">
-            <label>動画を表示しない：<input type="checkbox" v-model="config.video"></label><br>
-            <label>画像をサムネ形式で表示する？：<input type="checkbox" v-model="config.imgThumb"></label><br>
+            <label>動画を表示しない：<input type="checkbox" v-model="configTmp.video"></label><br>
+            <label>画像をサムネ形式で表示する？：<input type="checkbox" v-model="configTmp.imgThumb"></label><br>
             <button v-on:click="configSave">保存</button>
+            <transition name="msg">
+                <span id="savedMessage" v-if="savedMessage">保存しました</span>
+            </transition><br>
+            設定は再読込後有効になります。
         </dir>
         <div v-masonry transition-duration="0.5s" item-selector=".item" class="mainContents">
             <div v-for="fav in favList" class="tweet">
                 <div v-if="fav.extended_entities.media[0].type == 'video'" v-masonry-tile class="item video">
                     <!-- 動画だったら動画を表示 -->
                     <a :href="getVideoURL(fav)" :data-fancybox="fav.id_str" :data-caption="fav.text + ` By ` + fav.user.name + `<br><a href='https://twitter.com/` + fav.user.screen_name + `/status/` + fav.id_str + `' target='_blank'>Twitterで元ツイートを見る→</a>`">
-                        <img :src="fav.extended_entities.media[0].media_url_https + ':small'">
+                        <img :src="fav.extended_entities.media[0].media_url_https + `:${config.imgThumb ? 'thumb' : 'small'}`">
                         <img src="/img/play.png" class="playBtn">
                     </a>
                 </div>
@@ -20,7 +24,7 @@
                     <!-- 画像表示部 -->
                     <div v-for="media in fav.extended_entities.media" v-masonry-tile class="item img">
                         <a :href="media.media_url_https" :data-fancybox="fav.id_str" :data-caption="fav.text + ` By ` + fav.user.name + `<br><a href='https://twitter.com/` + fav.user.screen_name + `/status/` + fav.id_str + `' target='_blank'>Twitterで元ツイートを見る→</a>`">
-                            <img :src="media.media_url_https + ':small'">
+                            <img :src="media.media_url_https + `:${config.imgThumb ? 'thumb' : 'small'}`">
                         </a>
                     </div>
                 </div>
@@ -48,6 +52,8 @@ export default {
             flag: false,
             loading: true,
             config: localStorage.getItem("config") != null ? JSON.parse(localStorage.getItem("config")) : {video: false, imgThumb: false},
+            configTmp: localStorage.getItem("config") != null ? JSON.parse(localStorage.getItem("config")) : {video: false, imgThumb: false},
+            savedMessage: false,
         }
     },
     mounted() {
@@ -67,14 +73,17 @@ export default {
         getFav() {
             axios.get('api/fav')
             .then(res => {
-                console.log(res.data);
                 // 取得した中で一番古いツイートのIDを取得
                 this.tmpFavId = res.data[res.data.length - 1].id_str;
-                console.log(this.tmpFavId);
                 // 画像つきのみを抽出
                 this.favList = res.data.filter(function (elem) {
                     return(typeof(elem.extended_entities) !== "undefined");
                 });
+
+                if (this.config.video) {
+                    this.favList = this.videoDelete(this.favList);
+                }
+
             }).catch((err) => {
                 console.log(err);
             }).then(() => {
@@ -86,10 +95,8 @@ export default {
             let params = { id: this.tmpFavId };
             axios.get('api/addfav', { params })
             .then(res => {
-                console.log(res.data);
                 // 取得した中で一番古いツイートのIDを取得
                 this.tmpFavId = res.data[res.data.length - 1].id_str;
-                console.log(this.tmpFavId);
                 // 先頭に同じ内容が入ってしまう対応
                 // 1つ目を消す
                 res.data.shift();
@@ -97,6 +104,11 @@ export default {
                 let tmpList = res.data.filter(function (elem) {
                     return(typeof(elem.extended_entities) !== "undefined");
                 });
+
+                if (this.config.video) {
+                    tmpList = this.videoDelete(tmpList);
+                }
+
                 let flag;
                 if (tmpList.length <= 15) {
                     flag = true;
@@ -147,7 +159,17 @@ export default {
             return videoTmp.url;
         },
         configSave() {
-            localStorage.setItem("config", JSON.stringify(this.config));
+            localStorage.setItem("config", JSON.stringify(this.configTmp));
+            this.savedMessage = true;
+            setTimeout(() => {
+                this.savedMessage = false;
+            }, 1000);
+        },
+        videoDelete(list) {
+            let notVideo = list.filter(function (elem) {
+                return(elem.extended_entities.media[0].type !== "video");
+            });
+            return notVideo;
         }
     }
 }
