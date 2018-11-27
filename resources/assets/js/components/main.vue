@@ -1,6 +1,12 @@
 <template>
     <div>
         <p>{{user.name}}さんのいいね一覧</p>
+        <p>設定</p>
+        <dir id="config">
+            <label>動画を表示しない：<input type="checkbox" v-model="config.video"></label><br>
+            <label>画像をサムネ形式で表示する？：<input type="checkbox" v-model="config.imgThumb"></label><br>
+            <button v-on:click="configSave">保存</button>
+        </dir>
         <div v-masonry transition-duration="0.5s" item-selector=".item" class="mainContents">
             <div v-for="fav in favList" class="tweet">
                 <div v-if="fav.extended_entities.media[0].type == 'video'" v-masonry-tile class="item video">
@@ -40,7 +46,8 @@ export default {
             pageHeight: 0,
             windowHeight: 0,
             flag: false,
-            loading: true
+            loading: true,
+            config: localStorage.getItem("config") != null ? JSON.parse(localStorage.getItem("config")) : {video: false, imgThumb: false},
         }
     },
     mounted() {
@@ -138,6 +145,9 @@ export default {
                 }
             });
             return videoTmp.url;
+        },
+        configSave() {
+            localStorage.setItem("config", JSON.stringify(this.config));
         }
     }
 }
