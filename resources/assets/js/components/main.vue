@@ -20,6 +20,7 @@
                 </div>
             </div>
         </div>
+        <div id="loading" v-show="this.loading"><img src="/img/load.gif">loading...</div>
     </div>
 </template>
 
@@ -38,7 +39,8 @@ export default {
             scrollY: 0,
             pageHeight: 0,
             windowHeight: 0,
-            flag: false
+            flag: false,
+            loading: true
         }
     },
     mounted() {
@@ -66,9 +68,14 @@ export default {
                 this.favList = res.data.filter(function (elem) {
                     return(typeof(elem.extended_entities) !== "undefined");
                 });
-            })
+            }).catch((err) => {
+                console.log(err);
+            }).then(() => {
+                this.loading = false;
+            });
         },
         addFav() {
+            this.loading = true;
             let params = { id: this.tmpFavId };
             axios.get('api/addfav', { params })
             .then(res => {
@@ -96,7 +103,11 @@ export default {
                 if (flag == true) {
                     this.addFav();
                 }
-            })
+            }).catch((err) => {
+                console.log(err);
+            }).then(() => {
+                this.loading = false;
+            });
         },
         handleScroll() {
             // もっとスマートに実装したい

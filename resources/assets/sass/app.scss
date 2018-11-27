@@ -53,6 +53,15 @@ body {
     p {
         font-size: 16px;
     }
+    #loading {
+        position: fixed;
+        font-size: 20px;
+        bottom: 10px;
+        right: 10px;
+        border: 1px solid #888888;
+        padding: 2pt;
+        background-color: rgba($color: #ffffff, $alpha: 0.8);
+    }
 }
 
 .mainContents {
