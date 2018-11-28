@@ -68,6 +68,16 @@ body {
     .msg-enter, .msg-leave-to{
         opacity: 0;
     }
+    #configShowButton {
+        margin-bottom: 0;
+        cursor: pointer;
+        border: #888888 solid 1px;
+    }
+    #config {
+        margin-top: 0;
+        border: #888888 solid 1px;
+        border-top: 0;
+    }
 }
 
 .mainContents {

@@ -1,8 +1,8 @@
 <template>
     <div>
         <p>{{user.name}}さんのいいね一覧</p>
-        <p>設定</p>
-        <dir id="config">
+        <p id="configShowButton" v-on:click="configShowToggle">設定▽</p>
+        <dir id="config" v-if="configShow">
             <label>動画を表示しない：<input type="checkbox" v-model="configTmp.video"></label><br>
             <label>画像をサムネ形式で表示する：<input type="checkbox" v-model="configTmp.imgThumb"></label><br>
             <button v-on:click="configSave">保存</button>
@@ -54,6 +54,7 @@ export default {
             config: localStorage.getItem("config") != null ? JSON.parse(localStorage.getItem("config")) : {video: false, imgThumb: false},
             configTmp: localStorage.getItem("config") != null ? JSON.parse(localStorage.getItem("config")) : {video: false, imgThumb: false},
             savedMessage: false,
+            configShow: false,
         }
     },
     mounted() {
@@ -171,6 +172,9 @@ export default {
                 return(elem.extended_entities.media[0].type !== "video");
             });
             return notVideo;
+        },
+        configShowToggle() {
+            this.configShow = this.configShow ? false : true;
         }
     }
 }
