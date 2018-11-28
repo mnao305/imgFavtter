@@ -4,7 +4,7 @@
         <p>設定</p>
         <dir id="config">
             <label>動画を表示しない：<input type="checkbox" v-model="configTmp.video"></label><br>
-            <label>画像をサムネ形式で表示する？：<input type="checkbox" v-model="configTmp.imgThumb"></label><br>
+            <label>画像をサムネ形式で表示する：<input type="checkbox" v-model="configTmp.imgThumb"></label><br>
             <button v-on:click="configSave">保存</button>
             <transition name="msg">
                 <span id="savedMessage" v-if="savedMessage">保存しました</span>
