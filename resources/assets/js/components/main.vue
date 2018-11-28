@@ -66,7 +66,8 @@ export default {
                 console.log(res.data);
                 this.user = res.data;
                 if (this.user === 'notLogin') {
-                    console.log('');
+                    alert("ログインしていません。トップページからログインしなおしてください。");
+                    location.href = "/";
                 }
             })
         },
