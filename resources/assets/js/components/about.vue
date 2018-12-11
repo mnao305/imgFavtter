@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="about">
     <h2>このサイトについて</h2>
     <p>今までいいねしてきた画像を一覧で見たいという個人的な気持ちで作成したサイトです。</p>
     <p>1回あたりの読み込みツイートは最大100件で、スクロールしていけばAPIの制限に引っかからない限り無限に過去のいいねを見に行けるはずです。</p>
@@ -20,20 +20,18 @@
     </p>
 
     <h2>その他</h2>
-    <p>当サイトはベータ版です。予告なく停止する場合があります。
+    <p>
+      当サイトはベータ版です。予告なく停止する場合があります。
       <br>また、利用者にいかなる損害が発生した場合も責任は負いかねます。
       <br>何か問題がありましたら
       <a href="https://twitter.com/mnao_305" target="_blank">Twitter</a>か
       <a href="https://github.com/mnao305/imgFavtter/issues" target="_blank">GitHub</a>まで連絡いただけるとありがたいです。
     </p>
     <h2>リンク</h2>
-    <ul>
-      <li>
-        <a href="https://twitter.com/mnao_305" target="_blank">Twitter</a>
-      </li>
-      <li>
-        <a href="https://github.com/mnao305/imgFavtter" target="_blank">GitHub</a>
-      </li>
-    </ul>
+    <p>
+      <a href="https://twitter.com/mnao_305" target="_blank">Twitter</a>
+      <br>
+      <a href="https://github.com/mnao305/imgFavtter" target="_blank">GitHub</a>
+    </p>
   </div>
 </template>
