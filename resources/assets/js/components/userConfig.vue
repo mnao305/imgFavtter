@@ -1,5 +1,3 @@
 <template>
-    <div>
-        config page!!!
-    </div>
+  <div>config page!!!</div>
 </template>

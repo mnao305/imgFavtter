@@ -1,22 +1,24 @@
-import Vue from 'vue';
-import router from './router';
-import axios from 'axios';
-import { VueMasonryPlugin } from "vue-masonry";
-import VueAnalytics from "vue-analytics";
+import Vue from 'vue'
+import router from './router'
+// eslint-disable-next-line no-unused-vars
+import axios from 'axios'
+import { VueMasonryPlugin } from 'vue-masonry'
+import VueAnalytics from 'vue-analytics'
 
-require('./bootstrap');
+require('./bootstrap')
 
-window.Vue = require('vue');
+window.Vue = require('vue')
 
-Vue.use(VueMasonryPlugin);
+Vue.use(VueMasonryPlugin)
 
 Vue.use(VueAnalytics, {
-    id: 'UA-57438486-3',
-    router
-  })
+  id: 'UA-57438486-3',
+  router
+})
 
+// eslint-disable-next-line no-unused-vars
 const app = new Vue({
-    router,
-    el: '#app',
-    render: h => h(require('./app.vue'))
-});
+  router,
+  el: '#app',
+  render: h => h(require('./app.vue'))
+})
