@@ -30,6 +30,9 @@ body {
   -------------------------------------------------- */
 .container {
     width: auto;
+    .img {
+        width: 310px;
+    }
     img {
         max-width: 300px;
         margin: 10px 5px;
