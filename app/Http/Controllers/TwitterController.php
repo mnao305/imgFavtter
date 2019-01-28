@@ -81,7 +81,7 @@ class TwitterController extends Controller
         $twitter = session('twitter');
         try {
             // いいね履歴を入手
-            return $twitter->get("favorites/list", ["count" => "30", "max_id" => $request->get('id')]);
+            return $twitter->get("favorites/list", ["count" => "50", "max_id" => $request->get('id')]);
         } catch (\Error $e) {
             // いいね取得に失敗したらメッセージを表示させる
             return "いいねの取得に失敗しました。\nしばらくしてからやり直してください";
