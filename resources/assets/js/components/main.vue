@@ -18,7 +18,7 @@
       <br>設定は再読込後有効になります。
     </dir>
     <div v-masonry transition-duration="0.5s" item-selector=".item" class="mainContents">
-      <div v-for="fav in favList" class="tweet">
+      <div v-for="fav in favList" class="tweet" :key="fav.id_str">
         <div
           v-if="fav.extended_entities.media[0].type === 'video'"
           v-masonry-tile
@@ -38,7 +38,7 @@
         </div>
         <div v-else>
           <!-- 画像表示部 -->
-          <div v-for="media in fav.extended_entities.media" v-masonry-tile class="item img">
+          <div v-for="(media, index) in fav.extended_entities.media" :key="index" v-masonry-tile class="item img">
             <a
               :href="media.media_url_https"
               :data-fancybox="fav.id_str"
@@ -90,6 +90,7 @@ export default {
   },
   methods: {
     loginCheck () {
+      // eslint-disable-next-line no-undef
       axios.get('api/twitterUserCheck').then(res => {
         console.log(res.data)
         this.user = res.data
@@ -100,6 +101,7 @@ export default {
       })
     },
     getFav () {
+      // eslint-disable-next-line no-undef
       axios.get('api/fav').then(res => {
         // 取得した中で一番古いツイートのIDを取得
         this.tmpFavId = res.data[res.data.length - 1].id_str
@@ -120,6 +122,7 @@ export default {
     addFav () {
       this.loading = true
       let params = { id: this.tmpFavId }
+      // eslint-disable-next-line no-undef
       axios.get('api/addfav', { params }).then(res => {
         // 取得した中で一番古いツイートのIDを取得
         this.tmpFavId = res.data[res.data.length - 1].id_str
