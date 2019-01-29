@@ -30,8 +30,11 @@ body {
   -------------------------------------------------- */
 .container {
     width: auto;
-    .img {
+    .smallImg {
         width: 310px;
+    }
+    .thumbImg{
+        width: 160px;
     }
     img {
         max-width: 300px;

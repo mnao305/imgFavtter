@@ -38,7 +38,7 @@
         </div>
         <div v-else>
           <!-- 画像表示部 -->
-          <div v-for="(media, index) in fav.extended_entities.media" :key="index" v-masonry-tile class="item img">
+          <div v-for="(media, index) in fav.extended_entities.media" :key="index" v-masonry-tile class="item" v-bind:class="config.imgThumb ? 'thumbImg' : 'smallImg'">
             <a
               :href="media.media_url_https"
               :data-fancybox="fav.id_str"
